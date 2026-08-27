@@ -433,6 +433,16 @@
   .contact-card .line{margin-bottom:10px; color:var(--text-mid);}
   .contact-card .flag{color:var(--amber);}
   .contact-card a{color:var(--text-hi); text-decoration:underline; text-decoration-color:var(--line);}
+  .edit-note{
+    display:inline-block;
+    margin-left:8px;
+    font-size:11px;
+    color:var(--red);
+    background:#E8654B1A;
+    border:1px solid #E8654B40;
+    padding:1px 6px;
+    border-radius:4px;
+  }
 
   .contact-form{margin-top:22px; padding-top:22px; border-top:1px solid var(--line);}
   .field{margin-bottom:14px;}
@@ -482,6 +492,17 @@
     border:none;
     font-weight:600;
   }
+  .btn-call{
+    background:#5FA8E81A;
+    border:1px solid #5FA8E850;
+    color:var(--blue);
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .btn-call svg{width:15px;height:15px;}
+  .btn-call:hover{border-color:var(--blue);}
   .form-status{
     font-family:var(--mono);
     font-size:12px;
@@ -491,141 +512,6 @@
   }
   .form-status.ok{color:var(--green);}
   .form-status.err{color:var(--red);}
-
-  .spell-hint{
-    margin-top:6px;
-    font-family:var(--mono);
-    font-size:10.5px;
-    color:var(--text-lo);
-  }
-
-  #cf-submit{
-    min-width:170px;
-    position:relative;
-    overflow:hidden;
-    transition:transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
-  }
-  #cf-submit:hover{transform:translateY(-2px); box-shadow:0 12px 28px -8px rgba(95,168,232,0.7);}
-  #cf-submit.sending{pointer-events:none; filter:saturate(.7);}
-  #cf-submit.sending .send-icon{display:inline-block; animation:sendFly 850ms ease-in-out infinite;}
-  #cf-submit.sent{background:linear-gradient(90deg,var(--green),var(--blue));}
-  .send-icon{display:inline-block; transition:transform 200ms ease;}
-
-  @keyframes sendFly{
-    0%{transform:translateX(-3px) rotate(0deg);}
-    50%{transform:translateX(5px) rotate(-12deg);}
-    100%{transform:translateX(-3px) rotate(0deg);}
-  }
-
-  .success-modal{
-    position:fixed;
-    inset:0;
-    z-index:1200;
-    display:grid;
-    place-items:center;
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transition:opacity 300ms ease, visibility 300ms ease;
-  }
-  .success-modal.show{opacity:1; visibility:visible; pointer-events:auto;}
-  .success-backdrop{
-    position:absolute;
-    inset:0;
-    background:rgba(5,7,11,.78);
-    backdrop-filter:blur(8px);
-  }
-  .success-dialog{
-    position:relative;
-    width:min(440px, calc(100% - 32px));
-    background:var(--bg-1);
-    border:1px solid var(--line);
-    border-radius:14px;
-    padding:34px 30px 28px;
-    text-align:center;
-    box-shadow:0 30px 90px rgba(0,0,0,.65);
-    transform:translateY(20px) scale(.94);
-    transition:transform 400ms cubic-bezier(.2,.8,.2,1);
-  }
-  .success-modal.show .success-dialog{transform:translateY(0) scale(1);}
-  .success-close{
-    position:absolute;
-    top:10px;
-    right:12px;
-    border:0;
-    background:transparent;
-    color:var(--text-lo);
-    font-size:25px;
-    cursor:pointer;
-  }
-  .success-check{
-    width:44px;
-    height:44px;
-    margin:-6px auto 12px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:#8FD14F1A;
-    border:1px solid #8FD14F66;
-    color:var(--green);
-    font-size:24px;
-    animation:popCheck 550ms cubic-bezier(.2,1.4,.4,1) both;
-  }
-  .success-dialog h3{
-    margin:0 0 8px;
-    font-family:var(--mono);
-    font-size:21px;
-  }
-  .success-dialog p{margin:0 auto 20px; color:var(--text-mid); font-size:14px;}
-  .developer-face{
-    position:relative;
-    width:82px;
-    height:82px;
-    margin:0 auto 10px;
-    border:2px solid var(--green);
-    border-radius:50%;
-    background:var(--bg-2);
-    box-shadow:0 0 28px #8FD14F22;
-    animation:developerBounce 2s ease-in-out infinite;
-  }
-  .face-eyes{
-    position:absolute;
-    top:27px;
-    left:23px;
-    display:flex;
-    gap:17px;
-  }
-  .face-eyes span{width:7px;height:9px;border-radius:50%;background:var(--text-hi);}
-  .face-smile{
-    position:absolute;
-    left:27px;
-    top:42px;
-    width:25px;
-    height:13px;
-    border-bottom:3px solid var(--green);
-    border-radius:0 0 30px 30px;
-  }
-  .face-hand{
-    position:absolute;
-    right:-20px;
-    top:-8px;
-    font-size:27px;
-    transform-origin:bottom left;
-    animation:wave 900ms ease-in-out infinite;
-  }
-  @keyframes developerBounce{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-5px);}
-  }
-  @keyframes wave{
-    0%,100%{transform:rotate(8deg);}
-    50%{transform:rotate(-18deg);}
-  }
-  @keyframes popCheck{
-    0%{transform:scale(.2) rotate(-25deg);opacity:0;}
-    70%{transform:scale(1.15) rotate(5deg);opacity:1;}
-    100%{transform:scale(1) rotate(0);}
-  }
 
   footer{
     text-align:center;
@@ -716,24 +602,52 @@
     100%{stroke-dasharray:0 60;}
   }
 
-  .bug-field{position:absolute;inset:0;z-index:2;pointer-events:none;}
+  /* ---- bug creatures ---- */
   .bug{
     position:absolute;
-    width:30px;height:30px;
+    width:30px;
+    height:30px;
+    z-index:2;
     filter:drop-shadow(0 4px 6px rgba(0,0,0,0.4));
     transform-origin:50% 50%;
-    animation:bugwander var(--speed,3s) ease-in-out infinite alternate;
-    animation-delay:var(--delay,0s);
   }
-  .bug svg{width:100%;height:100%;display:block;}
+  .bug svg{width:100%; height:100%; display:block;}
   .bug .shell{fill:var(--red);}
   .bug .spot{fill:var(--bg-0);}
-  .bug .leg{stroke:var(--text-hi);stroke-width:2.4;stroke-linecap:round;}
-  .bug .antenna{stroke:var(--text-hi);stroke-width:2;stroke-linecap:round;fill:none;}
-  @keyframes bugwander{
-    0%{transform:translate(0,0) rotate(-6deg);}
-    50%{transform:translate(var(--dx),var(--dy)) rotate(7deg);}
-    100%{transform:translate(calc(var(--dx) * -0.55),calc(var(--dy) * .65)) rotate(-3deg);}
+  .bug .leg{stroke:var(--text-hi); stroke-width:2.4; stroke-linecap:round;}
+  .bug .antenna{stroke:var(--text-hi); stroke-width:2; stroke-linecap:round; fill:none;}
+
+  #bug1{top:-6px; left:6px; animation:crawl1 3.2s ease-in-out infinite;}
+  #bug2{top:10px; right:-8px; animation:crawl2 2.7s ease-in-out infinite;}
+  #bug3{bottom:34px; left:-14px; animation:crawl3 3.6s ease-in-out infinite;}
+  #bug4{bottom:20px; right:-10px; animation:crawl4 3s ease-in-out infinite;}
+
+  @keyframes crawl1{
+    0%,100%{transform:translate(0,0) rotate(-4deg);}
+    50%{transform:translate(10px,4px) rotate(6deg);}
+  }
+  @keyframes crawl2{
+    0%,100%{transform:translate(0,0) rotate(6deg) scaleX(-1);}
+    50%{transform:translate(-8px,6px) rotate(-4deg) scaleX(-1);}
+  }
+  @keyframes crawl3{
+    0%,100%{transform:translate(0,0) rotate(3deg);}
+    50%{transform:translate(6px,-8px) rotate(-6deg);}
+  }
+  @keyframes crawl4{
+    0%,100%{transform:translate(0,0) rotate(-6deg) scaleX(-1);}
+    50%{transform:translate(-6px,-6px) rotate(4deg) scaleX(-1);}
+  }
+
+  .bug.squashed{
+    pointer-events:none;
+    animation:bugdie 550ms cubic-bezier(.36,0,.66,-0.56) forwards !important;
+  }
+  @keyframes bugdie{
+    0%{transform:scale(1) rotate(0deg); opacity:1;}
+    30%{transform:scale(1.35,0.6) rotate(-8deg); opacity:1;}
+    60%{transform:scale(0.9,0.4) rotate(6deg); opacity:0.9;}
+    100%{transform:scale(0) rotate(0deg); opacity:0;}
   }
 
   .bug-spark{
