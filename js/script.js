@@ -92,35 +92,28 @@
         lastPhase=phase.label;
       }
 
-     const targetSquashed = Math.min(
-  bugCount,
-  Math.floor(progress / 100 * bugCount)
-);
+      const targetSquashed=Math.min(bugCount,Math.floor(progress/100*bugCount));
+      while(squashed<targetSquashed){
+        const bug = bugs[squashed];
+        const bugNumber = squashed + 1;
 
-while (squashed < targetSquashed) {
-  const bug = bugs[squashed];
+        // Trigger the same squash effect as the original loader.
+        // The CSS handles the visual hit/spark, then we remove the bug
+        // completely so it cannot remain visible after being fixed.
+        bug.classList.add('squashed');
 
-  // Make sure the bug exists before trying to remove it
-  if (bug) {
-    // Trigger squash animation
-    bug.classList.add('squashed');
+        setTimeout(() => {
+          bug.remove();
+        }, 600);
 
-    // Completely remove the bug after the animation
-    setTimeout(() => {
-      bug.remove();
-    }, 550);
-  }
-
-  squashed++;
-
-  // Update counter
-  captionEl.innerHTML = squashed < bugCount
-    ? `<b>${squashed} of ${bugCount}</b> bugs fixed...`
-    : `<b>All ${bugCount} bugs fixed ✓</b> Build is ready.`;
-}
+        squashed = bugNumber;
+        captionEl.innerHTML = squashed < bugCount
+          ? `<b>${squashed} of ${bugCount}</b> bugs fixed...`
+          : `<b>All ${bugCount} bugs fixed ✓</b> Build is ready.`;
+      }
 
       if(t<1) requestAnimationFrame(tick);
-      else setTimeout(finishLoading,500);
+      else setTimeout(finishLoading,750);
     }
     requestAnimationFrame(tick);
   })();
@@ -160,106 +153,164 @@ while (squashed < targetSquashed) {
   });
 
   // ---------- Recruiter contact form ----------
+  // EmailJS sends the message directly from the portfolio page.
+  // It does NOT open the recruiter's email application.
+  //
+  // Replace these three placeholders with the values from your EmailJS dashboard.
   const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
   const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
   const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
   const OWNER_EMAIL = 'endzipha@gmail.com';
 
   (function(){
-    const form=document.getElementById('contactForm');
-    const statusEl=document.getElementById('cf-status');
-    const submitBtn=document.getElementById('cf-submit');
-    const nameEl=document.getElementById('cf-name');
-    const companyEl=document.getElementById('cf-company');
-    const emailEl=document.getElementById('cf-email');
-    const roleEl=document.getElementById('cf-role');
-    const subjectEl=document.getElementById('cf-subject');
-    const msgEl=document.getElementById('cf-message');
-    const modal=document.getElementById('successModal');
-    const closeBtn=document.getElementById('successClose');
-    const okBtn=document.getElementById('successOk');
+    const form = document.getElementById('contactForm');
+    const statusEl = document.getElementById('cf-status');
+    const submitBtn = document.getElementById('cf-submit');
 
-    if(window.emailjs && EMAILJS_PUBLIC_KEY!=='YOUR_PUBLIC_KEY'){
-      emailjs.init({publicKey:EMAILJS_PUBLIC_KEY});
-    }
+    if (!form || !statusEl || !submitBtn) return;
+
+    const nameEl = document.getElementById('cf-name');
+    const companyEl = document.getElementById('cf-company');
+    const emailEl = document.getElementById('cf-email');
+    const roleEl = document.getElementById('cf-role');
+    const subjectEl = document.getElementById('cf-subject');
+    const msgEl = document.getElementById('cf-message');
+
+    const modal = document.getElementById('successModal');
+    const closeBtn = document.getElementById('successClose');
+    const okBtn = document.getElementById('successOk');
+
+    if (!modal) return;
 
     function openSuccess(){
       modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
+
     function closeSuccess(){
       modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-    }
-    closeBtn.addEventListener('click',closeSuccess);
-    okBtn.addEventListener('click',closeSuccess);
-    modal.querySelector('.success-backdrop').addEventListener('click',closeSuccess);
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
 
-    form.addEventListener('submit',function(e){
+      // Allow another message to be sent after closing the popup.
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('sending', 'sent');
+
+      const label = submitBtn.querySelector('.send-label');
+      const icon = submitBtn.querySelector('.send-icon');
+
+      if (label) label.textContent = 'Send message';
+      if (icon) icon.textContent = '➤';
+    }
+
+    closeBtn?.addEventListener('click', closeSuccess);
+    okBtn?.addEventListener('click', closeSuccess);
+
+    modal.querySelector('.success-backdrop')?.addEventListener(
+      'click',
+      closeSuccess
+    );
+
+    document.addEventListener('keydown', (event) => {
+      if (
+        event.key === 'Escape' &&
+        modal.classList.contains('show')
+      ) {
+        closeSuccess();
+      }
+    });
+
+    form.addEventListener('submit', async function(e){
       e.preventDefault();
 
-      if(!form.checkValidity()){
+      if (!form.checkValidity()) {
         form.reportValidity();
-        statusEl.textContent='Please check the highlighted fields.';
-        statusEl.className='form-status err';
+        statusEl.textContent = 'Please check the highlighted fields.';
+        statusEl.className = 'form-status err';
         return;
       }
 
-      submitBtn.disabled=true;
-      submitBtn.classList.add('sending');
-      submitBtn.querySelector('.send-label').textContent='Sending...';
-      statusEl.textContent='Preparing your message...';
-      statusEl.className='form-status';
-
-      const payload={
-        name:nameEl.value.trim(),
-        company:companyEl.value.trim(),
-        email:emailEl.value.trim(),
-        role:roleEl.value.trim(),
-        subject:subjectEl.value.trim(),
-        message:msgEl.value.trim(),
-        to_email:OWNER_EMAIL
+      const payload = {
+        name: nameEl.value.trim(),
+        company: companyEl.value.trim(),
+        email: emailEl.value.trim(),
+        role: roleEl.value.trim(),
+        subject: subjectEl.value.trim(),
+        message: msgEl.value.trim(),
+        to_email: OWNER_EMAIL
       };
 
-      const notConfigured=EMAILJS_PUBLIC_KEY==='YOUR_PUBLIC_KEY'
-        || EMAILJS_SERVICE_ID==='YOUR_SERVICE_ID'
-        || EMAILJS_TEMPLATE_ID==='YOUR_TEMPLATE_ID';
+      const notConfigured =
+        EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY' ||
+        EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' ||
+        EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID';
 
-      if(notConfigured){
-        const mailSubject=encodeURIComponent(payload.subject || `Portfolio contact from ${payload.name}`);
-        const body=encodeURIComponent(
-          `Name: ${payload.name}\nCompany: ${payload.company || 'Not provided'}\nEmail: ${payload.email}\nOpportunity / Role: ${payload.role || 'Not provided'}\n\n${payload.message}`
-        );
-        setTimeout(()=>{
-          window.location.href=`mailto:${OWNER_EMAIL}?subject=${mailSubject}&body=${body}`;
-          submitBtn.disabled=false;
-          submitBtn.classList.remove('sending');
-          submitBtn.querySelector('.send-label').textContent='Send message';
-        },650);
+      /*
+       * IMPORTANT:
+       * There is deliberately NO mailto() fallback here.
+       * If EmailJS has not been configured, the recruiter stays on
+       * this page and receives an explanatory error instead of being
+       * redirected to an email application.
+       */
+      if (notConfigured || !window.emailjs) {
+        statusEl.textContent =
+          'Direct sending is not configured yet. Add your EmailJS credentials in js/script.js.';
+        statusEl.className = 'form-status err';
         return;
       }
 
-      emailjs.send(EMAILJS_SERVICE_ID,EMAILJS_TEMPLATE_ID,payload)
-        .then(()=>{
-          submitBtn.classList.remove('sending');
-          submitBtn.classList.add('sent');
-          submitBtn.querySelector('.send-icon').textContent='✓';
-          submitBtn.querySelector('.send-label').textContent='Sent!';
-          statusEl.textContent='';
-          statusEl.className='form-status ok';
-          form.reset();
-          setTimeout(openSuccess,350);
-        })
-        .catch(err=>{
-          console.error(err);
-          statusEl.textContent='We couldn’t send the message. Please try again.';
-          statusEl.className='form-status err';
-          submitBtn.disabled=false;
-          submitBtn.classList.remove('sending');
-          submitBtn.querySelector('.send-label').textContent='Send message';
+      submitBtn.disabled = true;
+      submitBtn.classList.add('sending');
+
+      const label = submitBtn.querySelector('.send-label');
+      const icon = submitBtn.querySelector('.send-icon');
+
+      if (label) label.textContent = 'Sending...';
+      if (icon) icon.textContent = '⏳';
+
+      statusEl.textContent = 'Sending your message securely...';
+      statusEl.className = 'form-status sending';
+
+      try {
+        emailjs.init({
+          publicKey: EMAILJS_PUBLIC_KEY
         });
+
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          payload
+        );
+
+        // Successful send — recruiter remains on the portfolio.
+        form.reset();
+
+        submitBtn.classList.remove('sending');
+        submitBtn.classList.add('sent');
+
+        if (icon) icon.textContent = '✓';
+        if (label) label.textContent = 'Sent!';
+
+        statusEl.textContent = '';
+        statusEl.className = 'form-status ok';
+
+        // Small delay makes the button success animation visible.
+        setTimeout(openSuccess, 350);
+
+      } catch (err) {
+        console.error('EmailJS error:', err);
+
+        statusEl.textContent =
+          'We couldn’t send the message right now. Please try again.';
+        statusEl.className = 'form-status err';
+
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('sending', 'sent');
+
+        if (icon) icon.textContent = '➤';
+        if (label) label.textContent = 'Send message';
+      }
     });
   })();
 
