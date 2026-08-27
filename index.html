@@ -7,8 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- EmailJS lets this form send straight to your inbox with no backend. Free tier, setup instructions in the script below. -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="loading">
@@ -322,7 +320,10 @@
           <div class="spell-hint">✓ Browser spelling assistance is enabled — right-click underlined words to correct them.</div>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="cf-submit"><span class="send-icon">➤</span><span class="send-label">Send message</span></button>
+          <button type="submit" class="btn btn-primary" id="cf-submit">
+            <span class="send-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg></span>
+            <span class="send-label">Send message</span>
+          </button>
         </div>
         <div class="form-status" id="cf-status"></div>
       </form>
@@ -332,9 +333,12 @@
         <div class="success-dialog" role="dialog" aria-modal="true" aria-labelledby="successTitle">
           <button class="success-close" id="successClose" type="button" aria-label="Close">×</button>
           <div class="developer-face" aria-hidden="true">
-            <div class="face-eyes"><span></span><span></span></div>
-            <div class="face-smile"></div>
-            <div class="face-hand">👋</div>
+            <div class="dev-head">
+              <span class="dev-eye dev-eye-left"></span>
+              <span class="dev-eye dev-eye-right"></span>
+              <span class="dev-mouth"></span>
+            </div>
+            <span class="dev-arm"><span class="dev-hand"></span></span>
           </div>
           <div class="success-check">✓</div>
           <h3 id="successTitle">Message sent!</h3>
