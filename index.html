@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siyamthanda Ndzipha — Java Developer & Tech Mentor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- EmailJS lets this form send straight to your inbox with no backend. Free tier, setup instructions in the script below. -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="loading">
+
+<div id="loader" role="status" aria-live="polite">
+  <div class="loader-glow"></div>
+  <div class="loader-grid"></div>
+
+  <div class="rig">
+    <div class="bug-field" id="bugField" aria-hidden="true"></div>
+    <svg class="rig-laptop" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+      <rect class="screen" x="10" y="4" width="160" height="96" rx="6"/>
+      <rect class="base" x="0" y="100" width="180" height="10" rx="3"/>
+      <line class="rig-code-line l1" x1="28" y1="28" x2="88" y2="28"/>
+      <line class="rig-code-line l2" x1="28" y1="44" x2="130" y2="44"/>
+      <line class="rig-code-line l3" x1="28" y1="60" x2="100" y2="60"/>
+      <line class="rig-code-line l4" x1="28" y1="76" x2="70" y2="76"/>
+    </svg>
+  </div>
+
+  <div class="loader-caption" id="loaderCaption">Scanning codebase...</div>
+
+  <div class="loader-bar-wrap">
+    <div class="loader-track">
+      <div class="loader-fill" id="loaderFill"></div>
+    </div>
+    <div class="loader-text">
+      <span class="status" id="loaderStatus">Booting environment...</span>
+      <span class="pct" id="loaderPct">0%</span>
+    </div>
+  </div>
+</div>
+
+<div class="chrome">
+  <div class="tabbar">
+    <div class="traffic"><span></span><span></span><span></span></div>
+    <div class="filename">portfolio.java</div>
+    <nav class="tabnav">
+      <button data-target="#hero">Home</button>
+      <button data-target="#about">About</button>
+      <button data-target="#education">Education</button>
+      <button data-target="#skills">Skills</button>
+      <button data-target="#projects">Projects</button>
+      <button data-target="#tutoring">Tutoring</button>
+      <button data-target="#contact">Contact</button>
+    </nav>
+  </div>
+  <div class="pipeline">
+    <div class="pipeline-track">
+      <div class="pipeline-fill" id="pipelineFill"></div>
+    </div>
+    <div class="pipeline-label">
+      <span class="stage" id="pipelineStage">$ mvn clean install — INIT</span>
+      <span class="pct" id="pipelinePct">0%</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="terminal">
+      <div class="terminal-head">
+        <span></span><span></span><span></span>
+        <div class="terminal-title">zsh — sndzipha@wethinkcode</div>
+      </div>
+      <div class="terminal-body">
+        <div><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+        <div class="out"><b>Siyamthanda Ndzipha</b> — Java Developer &amp; Peer Tutor</div>
+
+        <div><span class="prompt">$</span> <span class="cmd">cat status.log</span></div>
+        <div class="out">
+          Studying at <b>WeThinkCode_</b>, building things in Java, breaking<br>
+          them, then fixing them again. Currently deep in <b>Robot Worlds</b> —<br>
+          a multi-robot TCP client-server simulation.<span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+    <p class="hero-role">Java developer with a habit for clean OOP, thorough tests, and helping the cohort get unstuck.</p>
+    <div class="cta-row">
+      <a class="btn-cv" href="cv.pdf" download>
+        <span class="dl-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        Download CV
+      </a>
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="eyebrow">about</p>
+    <h2>Profile</h2>
+    <div class="about-grid">
+      <div class="json-card">
+<pre style="margin:0; white-space:pre-wrap;">{
+  <span class="k">"name"</span><span class="punct">:</span> <span class="s">"Siyamthanda Ndzipha"</span>,
+  <span class="k">"role"</span><span class="punct">:</span> <span class="s">"Peer Tutor / Tech Mentor"</span>,
+  <span class="k">"based_at"</span><span class="punct">:</span> <span class="s">"WeThinkCode_"</span>,
+  <span class="k">"studying"</span><span class="punct">:</span> <span class="s">"Software Engineering"</span>,
+  <span class="k">"enjoys"</span><span class="punct">:</span> [<span class="s">"building backend services in Java"</span>, <span class="s">"collaborating with peers"</span>],
+  <span class="k">"currently_learning"</span><span class="punct">:</span> [<span class="s">"Cloud"</span>, <span class="s">"System Integration"</span>, <span class="s">"APIs"</span>, <span class="s">"Legacy Code / Brownfields"</span>]
+}</pre>
+      </div>
+      <div class="about-text">
+        <p>I'm <strong>Siyamthanda Ndzipha</strong>, currently studying Software Engineering at <strong>WeThinkCode_</strong>, where I also work as a <strong>Peer Tutor / Tech Mentor</strong> for my cohort.</p>
+        <p>I enjoy building <strong>backend services in Java</strong> — real systems with real edge cases, not just tutorial code. Right now I'm pushing further into <strong>cloud and system integration</strong>, learning how to work with <strong>APIs</strong> so different pieces of software can actually talk to each other, and getting comfortable working on <strong>legacy code through brownfields projects</strong>.</p>
+        <p>I also enjoy <strong>collaborating with peers</strong> at WeThinkCode_ — pairing on projects, trading feedback, and figuring out tricky problems together rather than in isolation.</p>
+        <p>On the tutoring side, I work through <strong>OOP concepts</strong> with my cohort, do code reviews, pair on debugging sessions, and help people get comfortable with Git and GitLab workflows.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <p class="eyebrow">education</p>
+    <h2>$ cat education.log</h2>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">2025 — current</span> · in progress</div>
+      <div class="log-title">WeThinkCode_ — Software Engineering</div>
+      <div class="log-tags"><span>Java</span><span>OOP</span><span>Testing</span><span>CI/CD</span><span>Data Communication Networks</span><span>Python</span></div>
+      <p>Full-time software engineering program covering Java, OOP, testing, and CI/CD, plus modules in Data Communication Networks and Python fundamentals. Also working as a Peer Tutor / Tech Mentor for the cohort alongside coursework.</p>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">2025</span> · not completed</div>
+      <div class="log-title">Durban University of Technology — Dip. in Application Development</div>
+      <div class="log-tags"><span>C#</span><span>Windows Forms</span></div>
+      <p>Studied application development with a focus on C#. Left the diploma after realising the coursework centred on Windows Forms applications — territory I'd already covered at College of Cape Town — and chose to move on rather than repeat the same ground.</p>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">2021 — 2023</span> · completed</div>
+      <div class="log-title">College of Cape Town — IT and Computer Science, Level 4</div>
+      <div class="log-tags"><span>VB.NET</span><span>Windows Forms</span><span>SQL</span><span>Systems Analysis &amp; Design</span><span>UI Design / Figma</span><span>Computer Literacy</span></div>
+      <p>Built desktop applications using Visual Basic .NET and Windows Forms. Also covered SQL, Systems Analysis and Design, Computer Literacy, and multimedia / UI design — including wireframing in Figma.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="eyebrow">skills</p>
+    <h2>Build meters</h2>
+
+    <div class="meter-row" data-level="80">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M8 3v4M16 3v4M4 9h16"/><path d="M9 14l2 2 4-4"/></svg></span>Java</span><span class="note">OOP, collections, JUnit</span><span class="val">80%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="92">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/><path d="M11 7h2a2 2 0 0 1 2 2v4"/></svg></span>OOP Design</span><span class="note">inheritance, polymorphism</span><span class="val">92%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="85">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>Debugging</span><span class="note">command classes, race conditions, ports</span><span class="val">85%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="80">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="12" r="2.4"/><path d="M6 8.4V15.6M8.2 7.2 15.8 10.8M8.2 16.8 15.8 13.2"/></svg></span>Git &amp; GitLab</span><span class="note">branching, merges, CI/CD</span><span class="val">80%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="75">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/></svg></span>Testing (JUnit)</span><span class="note">unit + acceptance tests</span><span class="val">75%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="55">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17a4 4 0 0 1-1-7.9A5 5 0 0 1 15.5 8 4.5 4.5 0 0 1 17 17H7z"/></svg></span>Spring Boot</span><span class="note">MySQL integration, in progress</span><span class="val">55%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="60">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>SQL &amp; Databases</span><span class="note">MySQL, relational design</span><span class="val">60%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="50">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>Python</span><span class="note">fundamentals — WeThinkCode_</span><span class="val">50%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="55">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg></span>C#</span><span class="note">Windows Forms — Durban University of Technology</span><span class="val">55%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="50">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>Docker &amp; CI/CD</span><span class="note">containerizing services, pipelines</span><span class="val">50%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="55">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v7l4 4"/><circle cx="12" cy="14" r="8"/></svg></span>UI/UX Design</span><span class="note">wireframes, Figma — College of Cape Town</span><span class="val">55%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="90">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.35-9.5-8.5C.87 8.24 2.4 5 5.6 5c1.7 0 3 1 4.4 2.6C11.4 6 12.7 5 14.4 5c3.2 0 4.73 3.24 3.1 6.5C19 15.65 12 20 12 20z"/></svg></span>Mentoring &amp; Code Review</span><span class="note">peer tutoring, cohort support</span><span class="val">90%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+
+    <div class="meter-row" data-level="85">
+      <div class="meter-top"><span class="name"><span class="skill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="8" r="3"/><path d="M2 20c0-3 2.5-5 6-5s6 2 6 5M13 15.5c1-1 2.5-1.5 4-1.5 3 0 5 2 5 5"/></svg></span>Collaboration</span><span class="note">pairing, code reviews, teamwork</span><span class="val">85%</span></div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="eyebrow">projects</p>
+    <h2>$ git log --oneline --stat</h2>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">commit a1c9f3e</span> · brownfields project</div>
+      <div class="log-title">Robot Worlds — Multi-Robot Client-Server Simulation</div>
+      <div class="log-tags"><span>Java</span><span>Maven</span><span>JUnit</span><span>GitLab CI/CD</span></div>
+      <p>A TCP-based simulation server where multiple robot clients act inside a shared world. Wrote and fixed acceptance tests for command classes (Look, Fire, Forward, Back), resolved a routing bug in the server's purge command, debugged port-mismatch issues in test bootstrapping, and tuned the .gitlab-ci.yml pipeline for Maven/JUnit.</p>
+      <a class="log-link" href="https://github.com/yourusername/robot-worlds" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">commit 7e2b881</span> · client project</div>
+      <div class="log-title">HairBySentle — Ecommerce + Appointment Booking</div>
+      <div class="log-tags"><span>Java</span><span>Spring Boot</span><span>MySQL</span></div>
+      <p>An ecommerce website with appointment booking built in for a hair salon — customers can shop products and book appointments in one place. Currently working through entity relationships and dependency configuration to get the MySQL-backed data layer solid.</p>
+      <a class="log-link" href="https://github.com/yourusername/hairbysentle" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-meta"><span class="hash">commit 4d0a92c</span> · project</div>
+      <div class="log-title">School Management System</div>
+      <div class="log-tags"><span>Java</span><span>OOP</span></div>
+      <p>A system for handling day-to-day school administration — managing student, teacher, and course records with the CRUD operations a school office actually needs.</p>
+      <a class="log-link" href="https://github.com/yourusername/school-management-system" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        View on GitHub
+      </a>
+    </div>
+  </section>
+
+  <section id="tutoring">
+    <p class="eyebrow">tutoring</p>
+    <h2>$ man peer-tutor</h2>
+    <div class="manpage">
+      <h3>NAME</h3>
+      <p>peer-tutor — Siyamthanda Ndzipha, WeThinkCode_ cohort</p>
+
+      <h3>DESCRIPTION</h3>
+      <p>Works one-on-one and in small groups with cohort members on:</p>
+      <ul>
+        <li><strong>OOP concepts</strong> — inheritance, polymorphism, design decisions</li>
+        <li><strong>Code review</strong> — reading real code, spotting issues, explaining why</li>
+        <li><strong>Debugging</strong> — pairing through a bug from symptom to root cause</li>
+        <li><strong>Git &amp; GitLab workflows</strong> — branching, merge conflicts, CI pipelines</li>
+      </ul>
+
+      <h3>SEE ALSO</h3>
+      <p>session review logs, cohort office hours</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="eyebrow">contact</p>
+    <h2>$ contact --info</h2>
+    <div class="contact-card">
+      <div class="line"><span class="flag">--email</span> <a href="mailto:endzipha@gmail.com">endzipha@gmail.com</a></div>
+      <div class="line"><span class="flag">--phone</span> <a href="tel:+27622370670">+27 622 370 670</a></div>
+      <div class="line"><span class="flag">--github</span> <a href="https://github.com/Ndzipha-devloveper" target="_blank" rel="noopener">github.com/Ndzipha-devloveper</a></div>
+      <div class="line"><span class="flag">--linkedin</span> <a href="https://www.linkedin.com/in/siyamthanda-ndzipha-b8364a299/" target="_blank" rel="noopener">linkedin.com/in/siyamthanda-ndzipha-b8364a299/</a></div>
+
+      <div class="social-row">
+        <a class="social-icon" href="mailto:your.email@example.com" aria-label="Email" title="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </a>
+        <a class="social-icon" href="https://github.com/Ndzipha-devloveper" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.linkedin.com/in/siyamthanda-ndzipha-b8364a299/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v1.5A6 6 0 0 1 16 8Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <label for="cf-name">name</label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name" spellcheck="true" placeholder="Recruiter name">
+        </div>
+        <div class="field">
+          <label for="cf-company">company</label>
+          <input type="text" id="cf-company" name="company" autocomplete="organization" spellcheck="true" placeholder="Company name">
+        </div>
+        <div class="field">
+          <label for="cf-email">email</label>
+          <input type="email" id="cf-email" name="email" required autocomplete="email" spellcheck="false" placeholder="you@company.com">
+        </div>
+        <div class="field">
+          <label for="cf-role">opportunity / role</label>
+          <input type="text" id="cf-role" name="role" spellcheck="true" placeholder="e.g. Junior Java Developer">
+        </div>
+        <div class="field">
+          <label for="cf-subject">subject</label>
+          <input type="text" id="cf-subject" name="subject" required spellcheck="true" placeholder="Interested in your profile">
+        </div>
+        <div class="field">
+          <label for="cf-message">message</label>
+          <textarea id="cf-message" name="message" rows="5" required spellcheck="true" placeholder="Hi Siyamthanda, we'd love to chat about..."></textarea>
+          <div class="spell-hint">✓ Browser spelling assistance is enabled — right-click underlined words to correct them.</div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="cf-submit"><span class="send-icon">➤</span><span class="send-label">Send message</span></button>
+        </div>
+        <div class="form-status" id="cf-status"></div>
+      </form>
+
+      <div class="success-modal" id="successModal" aria-hidden="true">
+        <div class="success-backdrop"></div>
+        <div class="success-dialog" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+          <button class="success-close" id="successClose" type="button" aria-label="Close">×</button>
+          <div class="developer-face" aria-hidden="true">
+            <div class="face-eyes"><span></span><span></span></div>
+            <div class="face-smile"></div>
+            <div class="face-hand">👋</div>
+          </div>
+          <div class="success-check">✓</div>
+          <h3 id="successTitle">Message sent!</h3>
+          <p>Thanks for showing interest in my work. I really appreciate you reaching out — I'll get back to you as soon as I can.</p>
+          <button class="btn btn-primary success-ok" id="successOk" type="button">Awesome, thanks!</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>portfolio.java · Siyamthanda Ndzipha · built with HTML, CSS &amp; a bit of JS</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
