@@ -92,14 +92,32 @@
         lastPhase=phase.label;
       }
 
-      const targetSquashed=Math.min(bugCount,Math.floor(progress/100*bugCount));
-      while(squashed<targetSquashed){
-        bugs[squashed].classList.add('squashed');
-        squashed++;
-        captionEl.innerHTML=squashed<bugCount
-          ? `<b>${squashed} of ${bugCount}</b> bugs fixed...`
-          : `<b>All ${bugCount} bugs fixed ✓</b> Build is ready.`;
-      }
+     const targetSquashed = Math.min(
+  bugCount,
+  Math.floor(progress / 100 * bugCount)
+);
+
+while (squashed < targetSquashed) {
+  const bug = bugs[squashed];
+
+  // Make sure the bug exists before trying to remove it
+  if (bug) {
+    // Trigger squash animation
+    bug.classList.add('squashed');
+
+    // Completely remove the bug after the animation
+    setTimeout(() => {
+      bug.remove();
+    }, 550);
+  }
+
+  squashed++;
+
+  // Update counter
+  captionEl.innerHTML = squashed < bugCount
+    ? `<b>${squashed} of ${bugCount}</b> bugs fixed...`
+    : `<b>All ${bugCount} bugs fixed ✓</b> Build is ready.`;
+}
 
       if(t<1) requestAnimationFrame(tick);
       else setTimeout(finishLoading,500);
