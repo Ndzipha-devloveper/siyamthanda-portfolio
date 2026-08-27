@@ -724,3 +724,361 @@
     .bug{animation:none;}
     .loader-grid, .loader-glow, .loader-fill::after{animation:none;}
   }
+
+
+/* =========================================================
+   RECRUITER MESSAGE SENDING
+   ========================================================= */
+
+#cf-submit {
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+
+#cf-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+#cf-submit:disabled {
+  cursor: wait;
+}
+
+#cf-submit.sending {
+  min-width: 150px;
+  opacity: .9;
+}
+
+#cf-submit.sent {
+  animation: messageSentPulse .6s ease;
+}
+
+@keyframes messageSentPulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+.form-status.sending {
+  color: var(--text-mid);
+}
+
+.form-status.err {
+  animation: messageErrorShake .35s ease;
+}
+
+@keyframes messageErrorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+
+/* =========================================================
+   MODERN MESSAGE SUCCESS POPUP
+   ========================================================= */
+
+.success-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity .35s ease,
+    visibility .35s ease;
+}
+
+.success-modal.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.success-backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, .76);
+  backdrop-filter: blur(12px);
+}
+
+.success-dialog {
+  position: relative;
+  z-index: 1;
+
+  width: min(480px, 100%);
+
+  padding: 36px 32px 30px;
+
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(95, 168, 229, .16),
+      transparent 48%
+    ),
+    var(--bg-1);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, .6),
+    0 0 60px rgba(95, 168, 229, .08);
+
+  transform: translateY(28px) scale(.92);
+
+  transition:
+    transform .45s cubic-bezier(.16, 1, .3, 1);
+}
+
+.success-modal.show .success-dialog {
+  transform: translateY(0) scale(1);
+}
+
+
+/* Close button */
+
+.success-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 50%;
+
+  color: var(--text-hi);
+  background: rgba(255, 255, 255, .06);
+
+  font-size: 24px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    transform .2s ease;
+}
+
+.success-close:hover {
+  background: rgba(255, 255, 255, .12);
+  transform: rotate(90deg);
+}
+
+
+/* Animated developer */
+
+.developer-face {
+  position: relative;
+
+  width: 105px;
+  height: 105px;
+
+  margin: 0 auto 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid var(--green);
+  border-radius: 50%;
+
+  background: rgba(101, 255, 177, .07);
+
+  box-shadow:
+    0 0 28px rgba(101, 255, 177, .15),
+    inset 0 0 22px rgba(101, 255, 177, .05);
+
+  animation:
+    developerFloat
+    2.2s
+    ease-in-out
+    infinite;
+}
+
+.face-eyes {
+  position: absolute;
+  top: 30px;
+
+  width: 42px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.face-eyes span {
+  width: 7px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: var(--text-hi);
+}
+
+.face-smile {
+  position: absolute;
+  left: 50%;
+  bottom: 23px;
+
+  width: 34px;
+  height: 17px;
+
+  border-bottom: 3px solid var(--text-hi);
+  border-radius: 0 0 30px 30px;
+
+  transform: translateX(-50%);
+}
+
+.face-hand {
+  position: absolute;
+  right: -16px;
+  bottom: -3px;
+
+  font-size: 32px;
+
+  transform-origin: 70% 80%;
+
+  animation:
+    developerWave
+    1.1s
+    ease-in-out
+    infinite;
+}
+
+@keyframes developerFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes developerWave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(18deg); }
+  50% { transform: rotate(-12deg); }
+  75% { transform: rotate(16deg); }
+}
+
+
+/* Success check */
+
+.success-check {
+  width: 42px;
+  height: 42px;
+
+  margin: -4px auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--bg-0);
+  background: var(--green);
+
+  font-size: 24px;
+  font-weight: 900;
+
+  box-shadow:
+    0 0 25px rgba(101, 255, 177, .25);
+
+  animation:
+    successCheckPop
+    .55s
+    cubic-bezier(.16, 1, .3, 1);
+}
+
+@keyframes successCheckPop {
+  0% {
+    transform: scale(0) rotate(-20deg);
+  }
+
+  70% {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+
+/* Success text */
+
+.success-dialog h3 {
+  margin: 0 0 12px;
+
+  color: var(--text-hi);
+
+  font-size: clamp(23px, 5vw, 30px);
+}
+
+.success-dialog p {
+  max-width: 390px;
+
+  margin: 0 auto 22px;
+
+  color: var(--text-mid);
+
+  line-height: 1.7;
+}
+
+.success-ok {
+  min-width: 155px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 560px) {
+
+  .success-modal {
+    padding: 16px;
+  }
+
+  .success-dialog {
+    padding: 32px 22px 24px;
+  }
+
+  .developer-face {
+    width: 90px;
+    height: 90px;
+  }
+
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .developer-face,
+  .face-hand,
+  .success-check,
+  #cf-submit.sent {
+    animation: none;
+  }
+
+  .success-dialog,
+  .success-modal {
+    transition: none;
+  }
+
+}
