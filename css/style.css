@@ -602,6 +602,13 @@
     100%{stroke-dasharray:0 60;}
   }
 
+  .bug-field{
+    position:absolute;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+  }
+
   /* ---- bug creatures ---- */
   .bug{
     position:absolute;
@@ -610,6 +617,8 @@
     z-index:2;
     filter:drop-shadow(0 4px 6px rgba(0,0,0,0.4));
     transform-origin:50% 50%;
+    animation:bugwander var(--speed, 3s) ease-in-out infinite alternate;
+    animation-delay:var(--delay, 0s);
   }
   .bug svg{width:100%; height:100%; display:block;}
   .bug .shell{fill:var(--red);}
@@ -617,31 +626,16 @@
   .bug .leg{stroke:var(--text-hi); stroke-width:2.4; stroke-linecap:round;}
   .bug .antenna{stroke:var(--text-hi); stroke-width:2; stroke-linecap:round; fill:none;}
 
-  #bug1{top:-6px; left:6px; animation:crawl1 3.2s ease-in-out infinite;}
-  #bug2{top:10px; right:-8px; animation:crawl2 2.7s ease-in-out infinite;}
-  #bug3{bottom:34px; left:-14px; animation:crawl3 3.6s ease-in-out infinite;}
-  #bug4{bottom:20px; right:-10px; animation:crawl4 3s ease-in-out infinite;}
-
-  @keyframes crawl1{
-    0%,100%{transform:translate(0,0) rotate(-4deg);}
-    50%{transform:translate(10px,4px) rotate(6deg);}
-  }
-  @keyframes crawl2{
-    0%,100%{transform:translate(0,0) rotate(6deg) scaleX(-1);}
-    50%{transform:translate(-8px,6px) rotate(-4deg) scaleX(-1);}
-  }
-  @keyframes crawl3{
-    0%,100%{transform:translate(0,0) rotate(3deg);}
-    50%{transform:translate(6px,-8px) rotate(-6deg);}
-  }
-  @keyframes crawl4{
-    0%,100%{transform:translate(0,0) rotate(-6deg) scaleX(-1);}
-    50%{transform:translate(-6px,-6px) rotate(4deg) scaleX(-1);}
+  @keyframes bugwander{
+    0%{transform:translate(0,0) rotate(-6deg);}
+    50%{transform:translate(var(--dx),var(--dy)) rotate(7deg);}
+    100%{transform:translate(calc(var(--dx) * -0.55),calc(var(--dy) * 0.65)) rotate(-3deg);}
   }
 
   .bug.squashed{
     pointer-events:none;
     animation:bugdie 550ms cubic-bezier(.36,0,.66,-0.56) forwards !important;
+    animation-delay:0s !important;
   }
   @keyframes bugdie{
     0%{transform:scale(1) rotate(0deg); opacity:1;}
@@ -658,6 +652,7 @@
   }
   .bug.squashed .bug-spark{
     animation:spark 550ms ease-out forwards;
+    animation-delay:0s !important;
   }
   @keyframes spark{
     0%{opacity:0; transform:scale(0.2);}

@@ -97,14 +97,26 @@
         const bug = bugs[squashed];
         const bugNumber = squashed + 1;
 
-        // Trigger the same squash effect as the original loader.
-        // The CSS handles the visual hit/spark, then we remove the bug
-        // completely so it cannot remain visible after being fixed.
-        bug.classList.add('squashed');
+        if(bug){
+          bug.classList.add('squashed');
 
-        setTimeout(() => {
-          bug.remove();
-        }, 600);
+          let removed = false;
+          const removeBug = () => {
+            if(!removed){
+              removed = true;
+              bug.remove();
+            }
+          };
+
+          bug.addEventListener('animationend', (e) => {
+            if(e.target === bug && e.animationName === 'bugdie'){
+              removeBug();
+            }
+          });
+
+          // Fallback safety in case animationend does not fire
+          setTimeout(removeBug, 600);
+        }
 
         squashed = bugNumber;
         captionEl.innerHTML = squashed < bugCount
