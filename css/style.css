@@ -399,7 +399,8 @@
   }
   .log-link svg{width:15px;height:15px;}
   .log-link:hover{border-color:var(--blue); gap:8px;}
-  .log-link.live-link{display:flex; justify-content:flex-end;}
+  .project-links{display:flex; justify-content:center; align-items:center; gap:18px; flex-wrap:nowrap; margin-top:14px;}
+  .project-links .log-link{margin-top:0;}
 
   /* ---------- Tutoring (man page) ---------- */
   .manpage{
