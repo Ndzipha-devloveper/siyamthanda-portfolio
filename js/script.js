@@ -333,7 +333,6 @@
 
     try{
       const result=await sendRecruiterMessage(formData);
-      if(!result?.success) throw new Error('Message was not accepted');
 
       form.reset();
       submitBtn.classList.remove('sending');
