@@ -251,7 +251,6 @@
   });
 
   // ---------- Recruiter contact form ----------
-// Frontend-only submission for now. Replace sendRecruiterMessage() with your backend call later.
 (function(){
   const form = document.getElementById('contactForm');
   const statusEl = document.getElementById('cf-status');
@@ -259,13 +258,35 @@
   const modal = document.getElementById('successModal');
   const closeBtn = document.getElementById('successClose');
   const okBtn = document.getElementById('successOk');
+  const FUNCTION_URL = 'https://5rpgaktr3excbpalc566d5tiwa0kpmua.lambda-url.eu-north-1.on.aws/';
 
   if(!form || !statusEl || !submitBtn || !modal) return;
 
   async function sendRecruiterMessage(formData){
-    // TEMPORARY: simulate the future backend request.
-    await new Promise(resolve => setTimeout(resolve, 1200));
-    return { success:true };
+    const message = [
+      formData.subject && `Subject: ${formData.subject}`,
+      formData.company && `Company: ${formData.company}`,
+      formData.role && `Opportunity / role: ${formData.role}`,
+      formData.message
+    ].filter(Boolean).join('\n\n');
+
+    const response = await fetch(FUNCTION_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message
+      })
+    });
+
+    const result = await response.json();
+    if(!response.ok || result.ok !== true) {
+      throw new Error(result.error || result.message || 'Message was not accepted');
+    }
+    return result;
   }
 
   function openSuccess(){
@@ -307,7 +328,7 @@
     const icon=submitBtn.querySelector('.send-icon');
     if(label) label.textContent='Sending...';
     if(icon) icon.innerHTML='<span class="send-spinner" aria-hidden="true"></span>';
-    statusEl.textContent='Preparing your message...';
+    statusEl.textContent='Sending your message...';
     statusEl.className='form-status sending';
 
     try{
@@ -319,12 +340,14 @@
       submitBtn.classList.add('sent');
       if(label) label.textContent='Sent!';
       if(icon) icon.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"/></svg>';
-      statusEl.textContent='Message prepared successfully.';
+      statusEl.textContent='Thanks! Your message was sent.';
       statusEl.className='form-status ok';
       setTimeout(openSuccess,350);
     }catch(err){
       console.error('Recruiter form error:',err);
-      statusEl.textContent='Something went wrong while sending your message. Please try again.';
+      statusEl.textContent=err.message
+        ? `Could not send: ${err.message}`
+        : 'Could not send your message. Check your connection and try again.';
       statusEl.className='form-status err';
       submitBtn.disabled=false;
       submitBtn.classList.remove('sending','sent');
