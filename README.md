@@ -17,3 +17,6 @@ and contact details together in one place.
 - HTML
 - CSS
 - JavaScript
+
+WeThinkCode_ Repository Verification
+WTC-GZ9Q3H8B
