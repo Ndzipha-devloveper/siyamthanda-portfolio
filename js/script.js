@@ -250,6 +250,65 @@
     });
   });
 
+  // ---------- AWS Educate badge carousel ----------
+  const badgeViewport = document.getElementById('badgeViewport');
+  if (badgeViewport) {
+    const badgeTrack = badgeViewport.querySelector('.badge-track');
+    const badgeCards = Array.from(badgeViewport.querySelectorAll('.badge-card'));
+    const badgeDots = Array.from(document.querySelectorAll('.badge-dot'));
+    const previousBadge = document.querySelector('.badge-prev');
+    const nextBadge = document.querySelector('.badge-next');
+    let activeBadge = 0;
+
+    function updateBadgeControls(index) {
+      activeBadge = index;
+      badgeDots.forEach((dot, dotIndex) => {
+        dot.setAttribute('aria-current', String(dotIndex === activeBadge));
+      });
+      if (previousBadge) previousBadge.disabled = activeBadge === 0;
+      if (nextBadge) nextBadge.disabled = activeBadge === badgeCards.length - 1;
+    }
+
+    function scrollToBadge(index) {
+      if (!badgeTrack || !badgeCards.length) return;
+      const targetIndex = Math.max(0, Math.min(index, badgeCards.length - 1));
+      updateBadgeControls(targetIndex);
+      badgeViewport.scrollTo({
+        left: badgeCards[targetIndex].offsetLeft - badgeTrack.offsetLeft,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+      });
+    }
+
+    function updateBadgeFromScroll() {
+      if (!badgeTrack || !badgeCards.length) return;
+      const currentIndex = badgeCards.reduce((closestIndex, card, index) => {
+        const closestOffset = badgeCards[closestIndex].offsetLeft - badgeTrack.offsetLeft;
+        const cardOffset = card.offsetLeft - badgeTrack.offsetLeft;
+        return Math.abs(cardOffset - badgeViewport.scrollLeft) < Math.abs(closestOffset - badgeViewport.scrollLeft)
+          ? index
+          : closestIndex;
+      }, 0);
+      updateBadgeControls(currentIndex);
+    }
+
+    badgeDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => scrollToBadge(index));
+    });
+    previousBadge?.addEventListener('click', () => scrollToBadge(activeBadge - 1));
+    nextBadge?.addEventListener('click', () => scrollToBadge(activeBadge + 1));
+    badgeViewport.addEventListener('scroll', updateBadgeFromScroll, { passive: true });
+    badgeViewport.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        scrollToBadge(activeBadge - 1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        scrollToBadge(activeBadge + 1);
+      }
+    });
+    updateBadgeControls(0);
+  }
+
   // ---------- Recruiter contact form ----------
 (function(){
   const form = document.getElementById('contactForm');

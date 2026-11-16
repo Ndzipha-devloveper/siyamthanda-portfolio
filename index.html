@@ -138,7 +138,12 @@
   <section id="badges">
     <p class="eyebrow">courses &amp; badges</p>
     <h2>$ aws educate --badges</h2>
-    <div class="badge-grid">
+    <div class="badge-carousel" role="region" aria-label="AWS Educate badges">
+      <button class="badge-arrow badge-prev" type="button" aria-label="Previous badge">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="badge-viewport" id="badgeViewport" tabindex="0" aria-label="AWS Educate badge carousel">
+       <div class="badge-track">
       <article class="badge-card">
         <img src="files/badges/aws-educate-introduction-to-cloud-101-training-badg.png" alt="AWS Educate Introduction to Cloud 101 badge" loading="lazy">
         <h3>Introduction to Cloud 101</h3>
@@ -169,6 +174,19 @@
         <h3>Getting Started with Cloud Ops</h3>
         <p>AWS Educate</p>
       </article>
+       </div>
+      </div>
+      <button class="badge-arrow badge-next" type="button" aria-label="Next badge">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="badge-dots" role="group" aria-label="Choose a badge">
+      <button class="badge-dot" type="button" aria-label="Show Introduction to Cloud 101 badge" aria-current="true"></button>
+      <button class="badge-dot" type="button" aria-label="Show Getting Started with Compute badge" aria-current="false"></button>
+      <button class="badge-dot" type="button" aria-label="Show Getting Started with Networking badge" aria-current="false"></button>
+      <button class="badge-dot" type="button" aria-label="Show Getting Started with Storage badge" aria-current="false"></button>
+      <button class="badge-dot" type="button" aria-label="Show Getting Started with Databases badge" aria-current="false"></button>
+      <button class="badge-dot" type="button" aria-label="Show Getting Started with Cloud Ops badge" aria-current="false"></button>
     </div>
   </section>
 
