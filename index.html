@@ -11,7 +11,7 @@
 </head>
 <body class="loading">
 
-<div id="loader" role="status" aria-live="polite">
+<div id="loader" aria-live="off">
   <div class="loader-glow"></div>
   <div class="loader-grid"></div>
 
@@ -19,25 +19,28 @@
     <div class="hello-window-head">
       <div class="hello-traffic" aria-hidden="true"><span></span><span></span><span></span></div>
       <span>hello-world.java</span>
-      <span class="hello-live">RUNNING</span>
+      <span class="hello-live" id="helloLive">JAVA / READY</span>
     </div>
-    <div class="hello-code">
-      <div><span class="hello-line-number">01</span><span class="hello-keyword">public class</span> <span class="hello-class">Welcome</span> {</div>
-      <div><span class="hello-line-number">02</span>  <span class="hello-keyword">public static void</span> main(String[] args) {</div>
-      <div class="hello-print"><span class="hello-line-number">03</span>    System.out.println(<span class="hello-string">"<span id="helloOutput"></span><span class="hello-cursor" aria-hidden="true"></span>"</span>);</div>
-      <div><span class="hello-line-number">04</span>  }</div>
-      <div><span class="hello-line-number">05</span>}</div>
+    <div class="hello-code" aria-label="Java program being typed">
+      <div class="hello-code-row"><span class="hello-line-number">01</span><code id="helloLine1"></code></div>
+      <div class="hello-code-row"><span class="hello-line-number">02</span><code id="helloLine2"></code></div>
+      <div class="hello-code-row"><span class="hello-line-number">03</span><code id="helloLine3"></code></div>
+      <div class="hello-code-row"><span class="hello-line-number">04</span><code id="helloLine4"></code></div>
+      <div class="hello-code-row"><span class="hello-line-number">05</span><code id="helloLine5"></code></div>
+      <div class="hello-console-row" id="compileCommand"></div>
+      <div class="hello-console-row" id="runCommand"></div>
+      <div class="hello-console-row hello-output-row" id="helloOutput"></div>
     </div>
   </div>
 
-  <div class="loader-caption" id="loaderCaption">Starting something good...</div>
+  <div class="loader-caption" id="loaderCaption">Getting ready to say hello...</div>
 
   <div class="loader-bar-wrap">
     <div class="loader-track">
       <div class="loader-fill" id="loaderFill"></div>
     </div>
     <div class="loader-text">
-      <span class="status" id="loaderStatus">Compiling a warm welcome...</span>
+      <span class="status" id="loaderStatus" role="status" aria-live="polite">Opening the editor...</span>
       <span class="pct" id="loaderPct">0%</span>
     </div>
   </div>

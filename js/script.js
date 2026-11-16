@@ -1,22 +1,27 @@
-// Preloader: type a quick Hello, World! welcome
+// Preloader: type, compile, and run a Hello, World! program
 (function(){
   const loader = document.getElementById('loader');
   const fill = document.getElementById('loaderFill');
   const pctEl = document.getElementById('loaderPct');
   const statusEl = document.getElementById('loaderStatus');
   const captionEl = document.getElementById('loaderCaption');
-  const output = document.getElementById('helloOutput');
+  const liveEl = document.getElementById('helloLive');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if(!loader || !fill || !pctEl || !statusEl || !captionEl || !output) return;
+  const lineEls = [1, 2, 3, 4, 5].map(number => document.getElementById(`helloLine${number}`));
+  const compileEl = document.getElementById('compileCommand');
+  const runEl = document.getElementById('runCommand');
+  const outputEl = document.getElementById('helloOutput');
+  if(!loader || !fill || !pctEl || !statusEl || !captionEl || !liveEl ||
+     lineEls.some(line => !line) || !compileEl || !runEl || !outputEl) return;
 
-  const greeting = 'Hello, World!';
-  const duration = 2200;
-  const typeDuration = 1250;
-  const statuses = [
-    { at: 0, text: 'Warming up the welcome...' },
-    { at: 38, text: 'Writing your first line...' },
-    { at: 78, text: 'Portfolio ready.' }
+  const minimumDuration = 18000;
+  const sourceLines = [
+    'public class Welcome {',
+    '    public static void main(String[] args) {',
+    '        System.out.println("Hello, World!");',
+    '    }',
+    '}'
   ];
 
   function finishLoading(){
@@ -25,37 +30,106 @@
     setTimeout(() => loader.remove(), 650);
   }
 
-  if(reduceMotion){
-    output.textContent = greeting;
+  function showCompleteProgram(){
+    lineEls.forEach((line, index) => { line.textContent = sourceLines[index]; });
+    compileEl.textContent = '$ javac Welcome.java';
+    runEl.textContent = '$ java Welcome';
+    outputEl.textContent = 'Hello, World!';
     fill.style.width = '100%';
     pctEl.textContent = '100%';
     statusEl.textContent = 'Portfolio ready.';
-    captionEl.textContent = 'Hello, and welcome.';
+    captionEl.textContent = 'It works — welcome!';
+    liveEl.textContent = 'BUILD SUCCESS';
+  }
+
+  if(reduceMotion){
+    showCompleteProgram();
     finishLoading();
     return;
   }
 
-  const start = performance.now();
-  let lastStatus = '';
-  function tick(now){
-    const elapsed = now - start;
-    const progress = Math.min(100, Math.round(elapsed / duration * 100));
-    const typed = Math.min(greeting.length, Math.floor(elapsed / typeDuration * greeting.length));
-    output.textContent = greeting.slice(0, typed);
-    fill.style.width = progress + '%';
-    pctEl.textContent = progress + '%';
-
-    const status = statuses.filter(item => progress >= item.at).pop();
-    if(status && status.text !== lastStatus){
-      statusEl.textContent = status.text;
-      lastStatus = status.text;
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+  async function typeText(element, text){
+    const row = element.closest('.hello-code-row');
+    element.dataset.typing = 'true';
+    row?.classList.add('is-typing');
+    for(const character of text){
+      element.textContent += character;
+      const baseDelay = 62 + Math.random() * 48;
+      const punctuationPause = /[.{(;,]/.test(character) ? 100 + Math.random() * 100 : 0;
+      await wait(baseDelay + punctuationPause);
     }
-    if(progress === 100) captionEl.textContent = 'Hello, and welcome.';
-    if(progress < 100) requestAnimationFrame(tick);
-    else setTimeout(finishLoading, 300);
+    delete element.dataset.typing;
+    row?.classList.remove('is-typing');
   }
 
-  requestAnimationFrame(tick);
+  async function eraseText(element, count){
+    const row = element.closest('.hello-code-row');
+    element.dataset.typing = 'true';
+    row?.classList.add('is-typing');
+    for(let i = 0; i < count; i++){
+      element.textContent = element.textContent.slice(0, -1);
+      await wait(125);
+    }
+    delete element.dataset.typing;
+    row?.classList.remove('is-typing');
+  }
+
+  const startedAt = performance.now();
+  function updateProgress(now){
+    const progress = Math.min(100, Math.round((now - startedAt) / minimumDuration * 100));
+    fill.style.width = progress + '%';
+    pctEl.textContent = progress + '%';
+    if(progress < 100) requestAnimationFrame(updateProgress);
+  }
+
+  requestAnimationFrame(updateProgress);
+
+  (async function runWelcomeProgram(){
+    captionEl.textContent = 'Writing the class...';
+    statusEl.textContent = 'Typing Welcome.java';
+    await typeText(lineEls[0], sourceLines[0]);
+    await wait(360);
+    await typeText(lineEls[1], sourceLines[1]);
+    await wait(360);
+
+    captionEl.textContent = 'Tiny typo... fixing that.';
+    statusEl.textContent = 'Revising one line...';
+    const printPrefix = '        System.out.prinln';
+    await typeText(lineEls[2], printPrefix);
+    await wait(450);
+    await eraseText(lineEls[2], 2);
+    await typeText(lineEls[2], 'tln("Hello, World!");');
+
+    await wait(300);
+    await typeText(lineEls[3], sourceLines[3]);
+    await wait(180);
+    await typeText(lineEls[4], sourceLines[4]);
+
+    captionEl.textContent = 'Compiling the program...';
+    statusEl.textContent = 'Running javac Welcome.java';
+    liveEl.textContent = 'COMPILING';
+    await wait(350);
+    await typeText(compileEl, '$ javac Welcome.java');
+    await wait(850);
+
+    captionEl.textContent = 'Running the program...';
+    statusEl.textContent = 'Running java Welcome';
+    liveEl.textContent = 'RUNNING';
+    await typeText(runEl, '$ java Welcome');
+    await wait(500);
+    await typeText(outputEl, 'Hello, World!');
+
+    const remaining = minimumDuration - (performance.now() - startedAt);
+    if(remaining > 0) await wait(remaining);
+    fill.style.width = '100%';
+    pctEl.textContent = '100%';
+    captionEl.textContent = 'It works — welcome!';
+    statusEl.textContent = 'Portfolio ready.';
+    liveEl.textContent = 'BUILD SUCCESS';
+    await wait(450);
+    finishLoading();
+  })();
 })();
 
 // Build-pipeline scroll progress bar
