@@ -332,6 +332,17 @@
 })();
 
 // Animate skill meters when they scroll into view
+  const educationTagGroups = document.querySelectorAll('#education .log-tags');
+  const tagObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('tags-revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+  educationTagGroups.forEach(group => tagObserver.observe(group));
+
   const meters = document.querySelectorAll('.meter-row');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
