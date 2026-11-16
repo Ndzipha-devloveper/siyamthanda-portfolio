@@ -110,7 +110,7 @@
     await typeText(compileEl, '$ javac Welcome.java');
     await wait(850);
 
-    captionEl.textContent = 'Getting your portfolio ready...';
+    captionEl.textContent = 'Almost ready...';
     await typeText(runEl, '$ java Welcome');
     await wait(500);
     await typeText(outputEl, 'Hello, World!');
@@ -183,9 +183,10 @@
       if (!badgeCards.length) return;
       const targetIndex = Math.max(0, Math.min(index, badgeCards.length - 1));
       updateBadgeControls(targetIndex);
-      badgeCards[targetIndex].scrollIntoView({
-        block: 'nearest',
-        inline: 'center',
+      const card = badgeCards[targetIndex];
+      const cardCenter = card.getBoundingClientRect().left - badgeViewport.getBoundingClientRect().left + card.offsetWidth / 2;
+      badgeViewport.scrollTo({
+        left: badgeViewport.scrollLeft + cardCenter - badgeViewport.clientWidth / 2,
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
     }
