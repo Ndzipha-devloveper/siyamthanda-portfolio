@@ -129,11 +129,20 @@
     padding:6px 10px;
     border-radius:6px;
     cursor:pointer;
+    transition:color 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   }
   .tabnav button:hover{
     color:var(--text-hi);
-    border-color:var(--line);
-    background:var(--bg-2);
+    border-color:#5FA8E866;
+    background:#5FA8E81A;
+    box-shadow:0 0 12px rgba(95,168,232,0.28);
+    transform:translateY(-1px);
+  }
+  .tabnav button:focus-visible{
+    color:var(--text-hi);
+    border-color:var(--blue);
+    background:#5FA8E81A;
+    box-shadow:0 0 12px rgba(95,168,232,0.35);
   }
 
   .pipeline{
