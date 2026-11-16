@@ -272,15 +272,22 @@
       if (!badgeCards.length) return;
       const targetIndex = Math.max(0, Math.min(index, badgeCards.length - 1));
       updateBadgeControls(targetIndex);
+      const card = badgeCards[targetIndex];
+      const cardCenter = card.getBoundingClientRect().left - badgeViewport.getBoundingClientRect().left + card.offsetWidth / 2;
       badgeViewport.scrollTo({
-        left: targetIndex * badgeViewport.clientWidth,
+        left: badgeViewport.scrollLeft + cardCenter - badgeViewport.clientWidth / 2,
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
     }
 
     function updateBadgeFromScroll() {
       if (!badgeCards.length || !badgeViewport.clientWidth) return;
-      const currentIndex = Math.round(badgeViewport.scrollLeft / badgeViewport.clientWidth);
+      const viewportCenter = badgeViewport.getBoundingClientRect().left + badgeViewport.clientWidth / 2;
+      const currentIndex = badgeCards.reduce((closestIndex, card, index) => {
+        const cardCenter = card.getBoundingClientRect().left + card.offsetWidth / 2;
+        const closestCenter = badgeCards[closestIndex].getBoundingClientRect().left + badgeCards[closestIndex].offsetWidth / 2;
+        return Math.abs(cardCenter - viewportCenter) < Math.abs(closestCenter - viewportCenter) ? index : closestIndex;
+      }, 0);
       updateBadgeControls(currentIndex);
     }
 
