@@ -37,9 +37,9 @@
     outputEl.textContent = 'Hello, World!';
     fill.style.width = '100%';
     pctEl.textContent = '100%';
-    statusEl.textContent = 'Portfolio ready.';
-    captionEl.textContent = 'It works — welcome!';
-    liveEl.textContent = 'BUILD SUCCESS';
+    statusEl.textContent = 'Ready when you are.';
+    captionEl.textContent = 'Welcome — take a look around!';
+    liveEl.textContent = 'READY';
   }
 
   if(reduceMotion){
@@ -86,15 +86,13 @@
   requestAnimationFrame(updateProgress);
 
   (async function runWelcomeProgram(){
-    captionEl.textContent = 'Writing the class...';
-    statusEl.textContent = 'Typing Welcome.java';
+    captionEl.textContent = 'Getting things ready...';
     await typeText(lineEls[0], sourceLines[0]);
     await wait(360);
     await typeText(lineEls[1], sourceLines[1]);
     await wait(360);
 
-    captionEl.textContent = 'Tiny typo... fixing that.';
-    statusEl.textContent = 'Revising one line...';
+    captionEl.textContent = 'Adding the finishing touches...';
     const printPrefix = '        System.out.prinln';
     await typeText(lineEls[2], printPrefix);
     await wait(450);
@@ -106,16 +104,13 @@
     await wait(180);
     await typeText(lineEls[4], sourceLines[4]);
 
-    captionEl.textContent = 'Compiling the program...';
-    statusEl.textContent = 'Running javac Welcome.java';
-    liveEl.textContent = 'COMPILING';
+    captionEl.textContent = 'Almost there...';
+    liveEl.textContent = 'LOADING';
     await wait(350);
     await typeText(compileEl, '$ javac Welcome.java');
     await wait(850);
 
-    captionEl.textContent = 'Running the program...';
-    statusEl.textContent = 'Running java Welcome';
-    liveEl.textContent = 'RUNNING';
+    captionEl.textContent = 'Getting your portfolio ready...';
     await typeText(runEl, '$ java Welcome');
     await wait(500);
     await typeText(outputEl, 'Hello, World!');
@@ -124,9 +119,9 @@
     if(remaining > 0) await wait(remaining);
     fill.style.width = '100%';
     pctEl.textContent = '100%';
-    captionEl.textContent = 'It works — welcome!';
-    statusEl.textContent = 'Portfolio ready.';
-    liveEl.textContent = 'BUILD SUCCESS';
+    captionEl.textContent = 'Welcome — take a look around!';
+    statusEl.textContent = 'Ready when you are.';
+    liveEl.textContent = 'READY';
     await wait(450);
     finishLoading();
   })();
@@ -188,10 +183,9 @@
       if (!badgeCards.length) return;
       const targetIndex = Math.max(0, Math.min(index, badgeCards.length - 1));
       updateBadgeControls(targetIndex);
-      const card = badgeCards[targetIndex];
-      const cardCenter = card.getBoundingClientRect().left - badgeViewport.getBoundingClientRect().left + card.offsetWidth / 2;
-      badgeViewport.scrollTo({
-        left: badgeViewport.scrollLeft + cardCenter - badgeViewport.clientWidth / 2,
+      badgeCards[targetIndex].scrollIntoView({
+        block: 'nearest',
+        inline: 'center',
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
     }

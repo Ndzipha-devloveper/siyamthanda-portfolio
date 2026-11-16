@@ -171,6 +171,26 @@
     opacity:1;
     animation:led-orbit 2.5s linear infinite;
   }
+  @media (max-width:720px){
+    .tabbar{
+      flex-wrap:wrap;
+      gap:8px;
+      padding:8px 12px;
+    }
+    .tabnav{
+      order:3;
+      flex:1 1 100%;
+      min-width:0;
+      margin-left:0;
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scrollbar-width:none;
+      white-space:nowrap;
+      overscroll-behavior-x:contain;
+    }
+    .tabnav::-webkit-scrollbar{display:none;}
+    .tabnav button{flex:0 0 auto;}
+  }
 
   .pipeline{
     max-width:var(--maxw);
@@ -500,6 +520,7 @@
     --badge-card-width:min(280px, calc(100% - 32px));
     min-width:0;
     overflow-x:auto;
+    touch-action:pan-x;
     overscroll-behavior-x:contain;
     scrollbar-width:none;
     scroll-snap-type:x mandatory;
@@ -526,6 +547,7 @@
     border-radius:50%;
     box-shadow:0 0 16px rgba(95,168,232,.16), inset 0 0 12px rgba(95,168,232,.08);
     cursor:pointer;
+    touch-action:manipulation;
     transition:transform 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
   }
   .badge-arrow svg{width:24px;height:24px;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
@@ -559,6 +581,16 @@
     border-radius:99px;
     background:linear-gradient(90deg, var(--green), var(--blue));
     box-shadow:0 0 12px rgba(143,209,79,.45);
+  }
+  .education-badges{
+    margin-top:42px;
+    padding-top:30px;
+    border-top:1px solid var(--line);
+  }
+  .badges-title{
+    margin:0 0 18px;
+    color:var(--text-hi);
+    font:600 clamp(17px,2.4vw,21px)/1.4 var(--mono);
   }
   .badge-card{
     display:flex;
@@ -663,6 +695,24 @@
     .badge-carousel{grid-template-columns:38px minmax(0,1fr) 38px;gap:8px;}
     .badge-arrow{width:38px;height:38px;}
     .badge-arrow svg{width:20px;height:20px;}
+  }
+  @media (hover:none){
+    .terminal, .json-card, .log-entry, .manpage, .contact-card{
+      border-color:#5FA8E866;
+      box-shadow:0 0 18px rgba(95,168,232,.12), inset 0 0 18px rgba(95,168,232,.035);
+    }
+    .terminal::before, .json-card::before, .log-entry::before, .manpage::before, .contact-card::before{
+      opacity:1;
+      filter:drop-shadow(0 0 8px rgba(95,168,232,.8));
+    }
+    .badge-card{
+      border-color:#5FA8E877;
+      box-shadow:0 0 18px rgba(95,168,232,.18), inset 0 0 16px rgba(95,168,232,.05);
+    }
+    .badge-card::before{
+      opacity:1;
+      filter:drop-shadow(0 0 8px rgba(95,168,232,.9));
+    }
   }
   .log-link{
     display:inline-flex;
