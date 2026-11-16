@@ -253,7 +253,6 @@
   // ---------- AWS Educate badge carousel ----------
   const badgeViewport = document.getElementById('badgeViewport');
   if (badgeViewport) {
-    const badgeTrack = badgeViewport.querySelector('.badge-track');
     const badgeCards = Array.from(badgeViewport.querySelectorAll('.badge-card'));
     const badgeDots = Array.from(document.querySelectorAll('.badge-dot'));
     const previousBadge = document.querySelector('.badge-prev');
@@ -270,24 +269,18 @@
     }
 
     function scrollToBadge(index) {
-      if (!badgeTrack || !badgeCards.length) return;
+      if (!badgeCards.length) return;
       const targetIndex = Math.max(0, Math.min(index, badgeCards.length - 1));
       updateBadgeControls(targetIndex);
       badgeViewport.scrollTo({
-        left: badgeCards[targetIndex].offsetLeft - badgeTrack.offsetLeft,
+        left: targetIndex * badgeViewport.clientWidth,
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
     }
 
     function updateBadgeFromScroll() {
-      if (!badgeTrack || !badgeCards.length) return;
-      const currentIndex = badgeCards.reduce((closestIndex, card, index) => {
-        const closestOffset = badgeCards[closestIndex].offsetLeft - badgeTrack.offsetLeft;
-        const cardOffset = card.offsetLeft - badgeTrack.offsetLeft;
-        return Math.abs(cardOffset - badgeViewport.scrollLeft) < Math.abs(closestOffset - badgeViewport.scrollLeft)
-          ? index
-          : closestIndex;
-      }, 0);
+      if (!badgeCards.length || !badgeViewport.clientWidth) return;
+      const currentIndex = Math.round(badgeViewport.scrollLeft / badgeViewport.clientWidth);
       updateBadgeControls(currentIndex);
     }
 
