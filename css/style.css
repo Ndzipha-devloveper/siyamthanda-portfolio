@@ -18,6 +18,11 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  @property --led-angle{
+    syntax:"<angle>";
+    initial-value:0deg;
+    inherits:false;
+  }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
@@ -39,6 +44,36 @@
   }
 
   ::selection{background:var(--blue); color:#0B0D12;}
+
+  .terminal, .json-card, .log-entry, .manpage, .contact-card{
+    position:relative;
+    isolation:isolate;
+  }
+  .terminal::before, .json-card::before, .log-entry::before, .manpage::before, .contact-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:2;
+    padding:1px;
+    border-radius:inherit;
+    background:conic-gradient(
+      from var(--led-angle),
+      transparent 0deg,
+      #5FA8E8 38deg,
+      #8FD14F 54deg,
+      #E8A94B 70deg,
+      #E8654B 86deg,
+      transparent 108deg 360deg
+    );
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    mask-composite:exclude;
+    filter:drop-shadow(0 0 5px rgba(95,168,232,0.55));
+    pointer-events:none;
+    animation:led-orbit 4s linear infinite;
+  }
+  @keyframes led-orbit{to{--led-angle:360deg;}}
 
   /* ---------- Top chrome: tab bar + build pipeline bar ---------- */
   .chrome{
