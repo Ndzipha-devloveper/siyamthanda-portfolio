@@ -474,6 +474,56 @@
     box-shadow:0 0 14px currentColor;
   }
   .log-entry p{color:var(--text-mid); margin:0; font-size:14.5px;}
+  .badge-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(155px, 1fr));
+    gap:18px;
+  }
+  .badge-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:18px 14px;
+    text-align:center;
+    background:var(--bg-1);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    animation:badge-float 4s ease-in-out infinite;
+    transition:border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .badge-card:nth-child(2){animation-delay:400ms;}
+  .badge-card:nth-child(3){animation-delay:800ms;}
+  .badge-card:nth-child(4){animation-delay:1200ms;}
+  .badge-card:nth-child(5){animation-delay:1600ms;}
+  .badge-card:hover{
+    animation-play-state:paused;
+    border-color:var(--blue);
+    box-shadow:0 0 18px rgba(95,168,232,0.2);
+  }
+  .badge-card img{
+    display:block;
+    width:min(100%, 160px);
+    height:auto;
+    margin-bottom:12px;
+  }
+  .badge-card h3{
+    margin:0 0 4px;
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.5;
+  }
+  .badge-card p{
+    margin:0;
+    color:var(--text-lo);
+    font-size:12px;
+  }
+  @keyframes badge-float{
+    0%, 100%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .badge-card{animation:none;}
+  }
   .log-link{
     display:inline-flex;
     align-items:center;
