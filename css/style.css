@@ -427,10 +427,16 @@
     padding:3px 8px;
     border-radius:99px;
     box-shadow:0 0 10px rgba(95,168,232,0.2);
+    transition:transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
   }
   .log-tags span:nth-child(4n + 2){color:var(--green);background:#8FD14F12;border-color:#8FD14F55;box-shadow:0 0 10px rgba(143,209,79,0.2);}
   .log-tags span:nth-child(4n + 3){color:var(--amber);background:#E8A94B12;border-color:#E8A94B55;box-shadow:0 0 10px rgba(232,169,75,0.2);}
   .log-tags span:nth-child(4n){color:var(--red);background:#E8654B12;border-color:#E8654B55;box-shadow:0 0 10px rgba(232,101,75,0.2);}
+  .log-tags span:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.2);
+    box-shadow:0 0 14px currentColor;
+  }
   .log-entry p{color:var(--text-mid); margin:0; font-size:14.5px;}
   .log-link{
     display:inline-flex;
