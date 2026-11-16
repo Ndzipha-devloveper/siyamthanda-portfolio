@@ -15,26 +15,29 @@
   <div class="loader-glow"></div>
   <div class="loader-grid"></div>
 
-  <div class="rig">
-    <div class="bug-field" id="bugField" aria-hidden="true"></div>
-    <svg class="rig-laptop" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-      <rect class="screen" x="10" y="4" width="160" height="96" rx="6"/>
-      <rect class="base" x="0" y="100" width="180" height="10" rx="3"/>
-      <line class="rig-code-line l1" x1="28" y1="28" x2="88" y2="28"/>
-      <line class="rig-code-line l2" x1="28" y1="44" x2="130" y2="44"/>
-      <line class="rig-code-line l3" x1="28" y1="60" x2="100" y2="60"/>
-      <line class="rig-code-line l4" x1="28" y1="76" x2="70" y2="76"/>
-    </svg>
+  <div class="hello-window">
+    <div class="hello-window-head">
+      <div class="hello-traffic" aria-hidden="true"><span></span><span></span><span></span></div>
+      <span>hello-world.java</span>
+      <span class="hello-live">RUNNING</span>
+    </div>
+    <div class="hello-code">
+      <div><span class="hello-line-number">01</span><span class="hello-keyword">public class</span> <span class="hello-class">Welcome</span> {</div>
+      <div><span class="hello-line-number">02</span>  <span class="hello-keyword">public static void</span> main(String[] args) {</div>
+      <div class="hello-print"><span class="hello-line-number">03</span>    System.out.println(<span class="hello-string">"<span id="helloOutput"></span><span class="hello-cursor" aria-hidden="true"></span>"</span>);</div>
+      <div><span class="hello-line-number">04</span>  }</div>
+      <div><span class="hello-line-number">05</span>}</div>
+    </div>
   </div>
 
-  <div class="loader-caption" id="loaderCaption">Scanning codebase...</div>
+  <div class="loader-caption" id="loaderCaption">Starting something good...</div>
 
   <div class="loader-bar-wrap">
     <div class="loader-track">
       <div class="loader-fill" id="loaderFill"></div>
     </div>
     <div class="loader-text">
-      <span class="status" id="loaderStatus">Booting environment...</span>
+      <span class="status" id="loaderStatus">Compiling a warm welcome...</span>
       <span class="pct" id="loaderPct">0%</span>
     </div>
   </div>
