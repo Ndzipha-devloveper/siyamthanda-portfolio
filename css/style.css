@@ -209,13 +209,14 @@
   /* ---------- About ---------- */
   .about-grid{
     display:grid;
-    grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
-    gap:40px;
+    grid-template-columns:1fr;
+    gap:28px;
     align-items:start;
   }
-  @media (max-width:760px){.about-grid{grid-template-columns:1fr;}}
 
   .json-card{
+    width:fit-content;
+    max-width:100%;
     background:var(--bg-1);
     border:1px solid var(--line);
     border-radius:var(--radius);
@@ -229,6 +230,7 @@
   .json-card .s{color:var(--green);}
   .json-card .punct{color:var(--text-lo);}
 
+  .about-text{max-width:900px;}
   .about-text p{color:var(--text-mid); margin:0 0 16px; font-size:15.5px;}
   .about-text strong{color:var(--text-hi);}
 
