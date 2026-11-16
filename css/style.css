@@ -161,7 +161,7 @@
     border:1px solid var(--line);
     border-radius:var(--radius);
     overflow:hidden;
-    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6), 0 0 24px rgba(95,168,232,0.12);
   }
   .terminal-head{
     display:flex;
@@ -225,6 +225,7 @@
     font-size:13px;
     color:var(--text-mid);
     overflow-x:auto;
+    box-shadow:0 0 22px rgba(143,209,79,0.12);
   }
   .json-card .k{color:var(--blue);}
   .json-card .s{color:var(--green);}
@@ -356,7 +357,12 @@
     border-radius:var(--radius);
     padding:22px 24px;
     margin-bottom:18px;
+    box-shadow:0 0 20px rgba(95,168,232,0.11);
   }
+  #education .log-entry:nth-of-type(2){box-shadow:0 0 20px rgba(232,169,75,0.12);}
+  #education .log-entry:nth-of-type(3){box-shadow:0 0 20px rgba(143,209,79,0.12);}
+  #projects .log-entry:nth-of-type(2){box-shadow:0 0 20px rgba(143,209,79,0.12);}
+  #projects .log-entry:nth-of-type(3){box-shadow:0 0 20px rgba(232,169,75,0.12);}
   .log-meta{
     font-family:var(--mono);
     font-size:12px;
@@ -385,7 +391,11 @@
     border:1px solid #5FA8E840;
     padding:3px 8px;
     border-radius:99px;
+    box-shadow:0 0 10px rgba(95,168,232,0.2);
   }
+  .log-tags span:nth-child(4n + 2){color:var(--green);background:#8FD14F12;border-color:#8FD14F55;box-shadow:0 0 10px rgba(143,209,79,0.2);}
+  .log-tags span:nth-child(4n + 3){color:var(--amber);background:#E8A94B12;border-color:#E8A94B55;box-shadow:0 0 10px rgba(232,169,75,0.2);}
+  .log-tags span:nth-child(4n){color:var(--red);background:#E8654B12;border-color:#E8654B55;box-shadow:0 0 10px rgba(232,101,75,0.2);}
   .log-entry p{color:var(--text-mid); margin:0; font-size:14.5px;}
   .log-link{
     display:inline-flex;
@@ -413,6 +423,7 @@
     font-family:var(--mono);
     font-size:13.5px;
     color:var(--text-mid);
+    box-shadow:0 0 22px rgba(232,169,75,0.12);
   }
   .manpage h3{
     color:var(--text-lo);
@@ -433,6 +444,7 @@
     padding:28px;
     font-family:var(--mono);
     font-size:14px;
+    box-shadow:0 0 22px rgba(232,101,75,0.12);
   }
   .contact-card .line{margin-bottom:10px; color:var(--text-mid);}
   .contact-card .flag{color:var(--amber);}
